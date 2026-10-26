@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Foodify - Login</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #f7f3e9;
+        }
+
+        .login-container {
+            min-height: 100vh;
+            display: flex;
+        }
+
+        /* ================= LEFT SIDE ================= */
+
+        .left-section {
+            width: 55%;
+            min-height: 100vh;
+
+            background-image:
+                linear-gradient(
+                    rgba(0, 0, 0, 0.55),
+                    rgba(0, 0, 0, 0.65)
+                ),
+                url("images/login-food.jpg");
+
+            background-size: cover;
+            background-position: center;
+
+            color: white;
+
+            padding: 55px 70px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Foodify Logo */
+
+        .logo {
+            font-size: 46px;
+            font-weight: bold;
+            letter-spacing: -2px;
+        }
+
+        .logo span {
+            color: #e9c46a;
+        }
+
+        .tagline {
+            margin-top: 8px;
+            font-size: 12px;
+            letter-spacing: 5px;
+            color: #f5e6b3;
+        }
+
+        /* Main Text */
+
+        .hero-content {
+            max-width: 600px;
+            margin-top: 30px;
+        }
+
+        .hero-content h1 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 64px;
+            line-height: 1.05;
+            margin-bottom: 25px;
+        }
+
+        .hero-content h1 span {
+            color: #e9c46a;
+            font-style: italic;
+        }
+
+        .hero-content p {
+            font-size: 18px;
+            line-height: 1.7;
+            color: #eeeeee;
+            max-width: 520px;
+        }
+
+        /* Features */
+
+        .features {
+            display: flex;
+            gap: 45px;
+            margin-top: 40px;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+
+            background: #e9c46a;
+            color: #123c3d;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-size: 22px;
+        }
+
+        .feature-text {
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .feature-text strong {
+            display: block;
+            font-size: 16px;
+        }
+
+        /* Bottom Text */
+
+        .bottom-text {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 20px;
+            font-style: italic;
+            color: #f5e6b3;
+        }
+
+        /* ================= RIGHT SIDE ================= */
+
+        .right-section {
+            width: 45%;
+            min-height: 100vh;
+
+            background: #f7f3e9;
+
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Navigation */
+
+        .navbar {
+            height: 100px;
+
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+
+            padding: 0 70px;
+        }
+
+        .navbar a {
+            text-decoration: none;
+            color: #263b3c;
+
+            font-size: 16px;
+            margin-left: 38px;
+
+            position: relative;
+        }
+
+        .navbar a:hover {
+            color: #d89c32;
+        }
+
+        .navbar a.active {
+            color: #123c3d;
+            font-weight: bold;
+        }
+
+        .navbar a.active::after {
+            content: "";
+
+            position: absolute;
+            left: 0;
+            bottom: -12px;
+
+            width: 30px;
+            height: 3px;
+
+            background: #e9c46a;
+
+            border-radius: 10px;
+        }
+
+        /* Login Area */
+
+        .login-area {
+            flex: 1;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 30px 50px 70px;
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 500px;
+
+            background: white;
+
+            border-radius: 25px;
+
+            padding: 48px 50px;
+
+            box-shadow:
+                0 20px 50px rgba(18, 60, 61, 0.12);
+        }
+
+        .login-card h2 {
+            color: #123c3d;
+
+            font-family: Georgia, "Times New Roman", serif;
+
+            font-size: 38px;
+
+            margin-bottom: 10px;
+        }
+
+        .login-card .subtitle {
+            color: #7b8585;
+
+            font-size: 15px;
+
+            margin-bottom: 32px;
+
+            line-height: 1.5;
+        }
+
+        /* Input */
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+
+            color: #123c3d;
+
+            font-size: 14px;
+            font-weight: bold;
+
+            margin-bottom: 8px;
+        }
+
+        .input-box {
+            width: 100%;
+
+            height: 54px;
+
+            border: 1px solid #dce2df;
+
+            border-radius: 12px;
+
+            display: flex;
+            align-items: center;
+
+            padding: 0 16px;
+
+            transition: 0.3s;
+
+            background: #fafcfa;
+        }
+
+        .input-box:focus-within {
+            border-color: #e9c46a;
+
+            box-shadow:
+                0 0 0 3px rgba(233, 196, 106, 0.15);
+        }
+
+        .input-icon {
+            font-size: 19px;
+
+            margin-right: 12px;
+
+            color: #123c3d;
+        }
+
+        .input-box input {
+            width: 100%;
+
+            border: none;
+            outline: none;
+
+            background: transparent;
+
+            font-size: 15px;
+
+            color: #123c3d;
+        }
+
+        .input-box input::placeholder {
+            color: #9aa4a3;
+        }
+
+        /* Login Options */
+
+        .login-options {
+            display: flex;
+
+            justify-content: space-between;
+            align-items: center;
+
+            margin: 5px 0 25px;
+
+            font-size: 13px;
+        }
+
+        .remember {
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            color: #586666;
+        }
+
+        .remember input {
+            width: 16px;
+            height: 16px;
+
+            accent-color: #123c3d;
+        }
+
+        .forgot-password {
+            text-decoration: none;
+
+            color: #c98d2d;
+
+            font-weight: bold;
+        }
+
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+
+        /* Login Button */
+
+        .login-button {
+            width: 100%;
+
+            height: 55px;
+
+            border: none;
+
+            border-radius: 12px;
+
+            background: #123c3d;
+
+            color: white;
+
+            font-size: 17px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .login-button:hover {
+            background: #1b5556;
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 8px 20px rgba(18, 60, 61, 0.25);
+        }
+
+        .login-button span {
+            margin-left: 8px;
+            font-size: 20px;
+        }
+
+        /* Divider */
+
+        .divider {
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+
+            margin: 28px 0 20px;
+
+            color: #9aa4a3;
+
+            font-size: 13px;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: "";
+
+            height: 1px;
+
+            background: #dfe4e1;
+
+            flex: 1;
+        }
+
+        /* Social Buttons */
+
+        .social-buttons {
+            display: flex;
+
+            gap: 12px;
+        }
+
+        .social-button {
+            flex: 1;
+
+            height: 50px;
+
+            border: 1px solid #dce2df;
+
+            border-radius: 10px;
+
+            background: white;
+
+            cursor: pointer;
+
+            font-size: 15px;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            transition: 0.3s;
+        }
+
+        .social-button:hover {
+            background: #f7f3e9;
+
+            transform: translateY(-2px);
+        }
+
+        .google {
+            color: #db4437;
+        }
+
+        .facebook {
+            color: #1877f2;
+        }
+
+        .apple {
+            color: #111111;
+        }
+
+        /* Sign Up */
+
+        .signup-text {
+            text-align: center;
+
+            margin-top: 28px;
+
+            color: #697575;
+
+            font-size: 14px;
+        }
+
+        .signup-text a {
+            color: #c98d2d;
+
+            font-weight: bold;
+
+            text-decoration: none;
+        }
+
+        .signup-text a:hover {
+            text-decoration: underline;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 1000px) {
+
+            .login-container {
+                flex-direction: column;
+            }
+
+            .left-section {
+                width: 100%;
+                min-height: 500px;
+
+                padding: 40px;
+            }
+
+            .right-section {
+                width: 100%;
+            }
+
+            .navbar {
+                padding: 0 30px;
+            }
+
+            .login-area {
+                padding: 40px 25px;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .left-section {
+                min-height: 430px;
+                padding: 30px;
+            }
+
+            .logo {
+                font-size: 36px;
+            }
+
+            .hero-content h1 {
+                font-size: 42px;
+            }
+
+            .hero-content p {
+                font-size: 15px;
+            }
+
+            .features {
+                gap: 15px;
+                flex-wrap: wrap;
+            }
+
+            .feature-icon {
+                width: 40px;
+                height: 40px;
+            }
+
+            .feature-text {
+                font-size: 12px;
+            }
+
+            .navbar {
+                height: 80px;
+                justify-content: center;
+                padding: 0 15px;
+            }
+
+            .navbar a {
+                margin: 0 10px;
+                font-size: 13px;
+            }
+
+            .login-card {
+                padding: 35px 25px;
+            }
+
+            .login-card h2 {
+                font-size: 30px;
+            }
+
+            .social-buttons {
+                gap: 8px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <div class="login-container">
+
+
+        <!-- ================= LEFT SECTION ================= -->
+
+        <section class="left-section">
+
+            <div>
+
+                <div class="logo">
+                    Food<span>ify</span>
+                </div>
+
+                <div class="tagline">
+                    GOOD FOOD • HAPPY MOOD
+                </div>
+
+            </div>
+
+
+            <div class="hero-content">
+
+                <h1>
+                    Delicious Food,
+                    <br>
+                    Happier <span>You!</span>
+                </h1>
+
+                <p>
+                    Explore top restaurants, order your favourite meals,
+                    and make every bite count.
+                </p>
+
+
+                <div class="features">
+
+                    <div class="feature">
+
+                        <div class="feature-icon">
+                            🍴
+                        </div>
+
+                        <div class="feature-text">
+                            <strong>Top</strong>
+                            Restaurants
+                        </div>
+
+                    </div>
+
+
+                    <div class="feature">
+
+                        <div class="feature-icon">
+                            🚚
+                        </div>
+
+                        <div class="feature-text">
+                            <strong>Fast</strong>
+                            Delivery
+                        </div>
+
+                    </div>
+
+
+                    <div class="feature">
+
+                        <div class="feature-icon">
+                            ❤️
+                        </div>
+
+                        <div class="feature-text">
+                            <strong>Great</strong>
+                            Food
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="bottom-text">
+                Food brings people together ❤️
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= RIGHT SECTION ================= -->
+
+        <section class="right-section">
+
+
+            <!-- Navigation -->
+
+            <nav class="navbar">
+
+               
+
+                <a href="about.html">
+                    About us
+                </a>
+
+                
+
+            </nav>
+
+
+
+            <!-- Login -->
+
+            <div class="login-area">
+
+               <div class="login-card">
+
+    <h2>
+        Welcome Back 👋
+    </h2>
+
+    <p class="subtitle">
+        Log in to continue your food journey with Foodify.
+    </p>
+
+    <!-- ================= LOGIN FORM ================= -->
+
+    <form action="Login" method="post">
+
+        <!-- Email -->
+        <div class="input-group">
+
+            <label>
+                Email
+            </label>
+
+            <div class="input-box">
+
+                <span class="input-icon">
+                    ✉
+                </span>
+
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Enter your email"
+                    required>
+
+            </div>
+
+        </div>
+
+
+        <!-- Password -->
+        <div class="input-group">
+
+            <label>
+                Password
+            </label>
+
+            <div class="input-box">
+
+                <span class="input-icon">
+                    🔒
+                </span>
+
+                <input
+                    type="password"
+                    name="password"
+                    placeholder="Enter your password"
+                    required>
+
+            </div>
+
+        </div>
+
+
+        <!-- Remember / Forgot -->
+        <div class="login-options">
+
+            <label class="remember">
+
+                <input
+                    type="checkbox"
+                    name="remember">
+
+                Remember me
+
+            </label>
+
+
+            <a
+                href="#"
+                class="forgot-password">
+
+                Forgot Password?
+
+            </a>
+
+        </div>
+
+
+        <!-- Login Button -->
+        <button
+            type="submit"
+            class="login-button">
+
+            Log In
+            <span>→</span>
+
+        </button>
+
+    </form>
+
+    <!-- ================= END LOGIN FORM ================= -->
+
+
+    <!-- Divider -->
+    <div class="divider">
+        or continue with
+    </div>
+
+
+    <!-- Social Login -->
+    <div class="social-buttons">
+
+        <button
+            type="button"
+            class="social-button google">
+
+            <strong>G</strong>
+
+        </button>
+
+
+        <button
+            type="button"
+            class="social-button facebook">
+
+            <strong>f</strong>
+
+        </button>
+
+
+        <button
+            type="button"
+            class="social-button apple">
+
+            <strong>●</strong>
+
+        </button>
+
+    </div>
+
+
+    <!-- Signup -->
+    <p class="signup-text">
+
+        Don't have an account?
+
+        <a href="register.html">
+            Sign Up
+        </a>
+
+    </p>
+
+</div>
+
+            </div>
+
+        </section>
+
+
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,958 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>About Us | Foodify</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #f7f5ef;
+            color: #263238;
+            line-height: 1.7;
+        }
+
+        /* Navigation bar */
+
+        .navbar {
+            background: #073b3a;
+            padding: 18px 7%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 18px;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.12);
+        }
+
+        .logo {
+            font-size: 29px;
+            font-weight: bold;
+            color: #f5c542;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: white;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #f5c542;
+        }
+
+        /* Hero section */
+
+        .hero {
+            background: linear-gradient(135deg, #073b3a, #0b5552);
+            color: white;
+            padding: 85px 7%;
+            text-align: center;
+        }
+
+        .hero-label {
+            display: inline-block;
+            color: #f5c542;
+            border: 1px solid rgba(245, 197, 66, 0.6);
+            border-radius: 25px;
+            padding: 6px 17px;
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            margin-bottom: 22px;
+        }
+
+        .hero h1 {
+            font-size: 46px;
+            line-height: 1.2;
+            margin-bottom: 22px;
+        }
+
+        .hero h1 span {
+            color: #f5c542;
+        }
+
+        .hero p {
+            max-width: 760px;
+            margin: auto;
+            font-size: 17px;
+            color: #e0ece8;
+        }
+
+        .hero-button {
+            display: inline-block;
+            margin-top: 30px;
+            background: #f5c542;
+            color: #073b3a;
+            padding: 13px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .hero-button:hover {
+            background: #e6b52f;
+            transform: translateY(-2px);
+        }
+
+        /* General sections */
+
+        .section {
+            max-width: 1150px;
+            margin: auto;
+            padding: 75px 25px;
+        }
+
+        .section-heading {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-heading .eyebrow {
+            color: #a17b08;
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .section-heading h2 {
+            color: #073b3a;
+            font-size: 32px;
+            margin: 8px 0 12px;
+        }
+
+        .section-heading p {
+            max-width: 720px;
+            margin: auto;
+            color: #6b7777;
+        }
+
+        /* About introduction */
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 45px;
+            align-items: center;
+        }
+
+        .about-content h2 {
+            font-size: 31px;
+            color: #073b3a;
+            line-height: 1.35;
+            margin-bottom: 20px;
+        }
+
+        .about-content p {
+            color: #596565;
+            margin-bottom: 16px;
+        }
+
+        .about-visual {
+            min-height: 320px;
+            background: #e7eee7;
+            border-radius: 22px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .food-icon {
+            font-size: 85px;
+            margin-bottom: 15px;
+        }
+
+        .about-visual h3 {
+            color: #073b3a;
+            font-size: 25px;
+        }
+
+        .about-visual p {
+            color: #596565;
+            margin-top: 8px;
+        }
+
+        /* Mission and vision */
+
+        .mission-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 25px;
+        }
+
+        .mission-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            border-top: 4px solid #f5c542;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-icon {
+            font-size: 34px;
+            margin-bottom: 12px;
+        }
+
+        .mission-card h3 {
+            color: #073b3a;
+            font-size: 22px;
+            margin-bottom: 12px;
+        }
+
+        .mission-card p {
+            color: #596565;
+        }
+
+        /* Features */
+
+        .features-section {
+            background: #edf2ec;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 22px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 27px 23px;
+            border-radius: 13px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            width: 55px;
+            height: 55px;
+            background: #fff5cf;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 27px;
+            margin-bottom: 17px;
+        }
+
+        .feature-card h3 {
+            color: #073b3a;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            color: #6b7777;
+            font-size: 14px;
+        }
+
+        /* How it works */
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 20px;
+            text-align: center;
+        }
+
+        .step {
+            padding: 20px 12px;
+        }
+
+        .step-number {
+            width: 58px;
+            height: 58px;
+            margin: 0 auto 17px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #073b3a;
+            color: #f5c542;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .step h3 {
+            color: #073b3a;
+            font-size: 17px;
+            margin-bottom: 8px;
+        }
+
+        .step p {
+            color: #6b7777;
+            font-size: 14px;
+        }
+
+        /* Values */
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 22px;
+        }
+
+        .value-card {
+            padding: 25px;
+            border-radius: 13px;
+            background: white;
+            text-align: center;
+            border: 1px solid #e8e9df;
+        }
+
+        .value-card h3 {
+            color: #073b3a;
+            margin: 12px 0 8px;
+        }
+
+        .value-card p {
+            color: #6b7777;
+            font-size: 14px;
+        }
+
+        /* Call to action */
+
+        .cta {
+            background: #073b3a;
+            color: white;
+            text-align: center;
+            padding: 65px 25px;
+        }
+
+        .cta h2 {
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .cta p {
+            max-width: 650px;
+            margin: 0 auto;
+            color: #d9e5e1;
+        }
+
+        .cta .hero-button {
+            margin-top: 25px;
+        }
+
+        /* Footer */
+
+        footer {
+            background: #052c2b;
+            color: #d4e0dc;
+            padding: 45px 7% 20px;
+        }
+
+        .footer-grid {
+            max-width: 1150px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 35px;
+        }
+
+        .footer-brand {
+            color: #f5c542;
+            font-size: 25px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .footer-description {
+            max-width: 380px;
+            color: #b8cbc4;
+            font-size: 14px;
+        }
+
+        .footer-column h3 {
+            color: white;
+            font-size: 16px;
+            margin-bottom: 14px;
+        }
+
+        .footer-column a {
+            display: block;
+            width: fit-content;
+            color: #b8cbc4;
+            text-decoration: none;
+            font-size: 14px;
+            margin-bottom: 9px;
+        }
+
+        .footer-column a:hover {
+            color: #f5c542;
+        }
+
+        .footer-bottom {
+            max-width: 1150px;
+            margin: 30px auto 0;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.13);
+            text-align: center;
+            color: #a7bbb4;
+            font-size: 13px;
+        }
+
+        /* Responsive design */
+
+        @media (max-width: 850px) {
+            .hero h1 {
+                font-size: 37px;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .features-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .steps-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .values-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 550px) {
+            .navbar {
+                padding: 17px 5%;
+            }
+
+            .nav-links {
+                gap: 15px;
+            }
+
+            .nav-links a {
+                font-size: 13px;
+            }
+
+            .hero {
+                padding: 65px 6%;
+            }
+
+            .hero h1 {
+                font-size: 31px;
+            }
+
+            .hero p {
+                font-size: 15px;
+            }
+
+            .section {
+                padding: 55px 18px;
+            }
+
+            .section-heading h2,
+            .about-content h2,
+            .cta h2 {
+                font-size: 26px;
+            }
+
+            .mission-grid,
+            .features-grid,
+            .steps-grid,
+            .values-grid,
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-visual {
+                min-height: 260px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+
+        <a href="restaurant" class="logo">
+            Food<span>ify</span>
+        </a>
+
+        <div class="nav-links">
+            <a href="restaurant">Home</a>
+            <a href="about.html" class="active">About</a>
+            <a href="cart.jsp">Cart</a>
+            <a href="my-orders">My Orders</a>
+            <a href="profile">Profile</a>
+        </div>
+
+    </nav>
+
+
+    <!-- Hero section -->
+    <header class="hero">
+
+        <div class="hero-label">WELCOME TO FOODIFY</div>
+
+        <h1>
+            Bringing Your Favourite Food<br>
+            <span>Closer to You</span>
+        </h1>
+
+        <p>
+            Foodify makes discovering restaurants and ordering delicious
+            food simple and convenient. Explore menus, choose your favourites,
+            and place your order through one easy-to-use platform.
+        </p>
+
+        <a href="restaurant" class="hero-button">
+            Explore Restaurants
+        </a>
+
+    </header>
+
+
+    <!-- About Foodify -->
+    <section class="section">
+
+        <div class="about-grid">
+
+            <div class="about-content">
+
+                <h2>
+                    A Simpler Way to Discover and Order Food
+                </h2>
+
+                <p>
+                    Foodify is a food ordering application designed to help
+                    customers explore restaurants, browse menus, select
+                    their favourite dishes, and manage their orders in one place.
+                </p>
+
+                <p>
+                    Whether you are looking for a quick bite, a comforting
+                    meal, or something new to try, Foodify brings restaurant
+                    choices together in a convenient digital experience.
+                </p>
+
+                <p>
+                    Our goal is to make the journey from discovering a dish
+                    to placing an order straightforward, user-friendly,
+                    and enjoyable.
+                </p>
+
+            </div>
+
+            <div class="about-visual">
+
+                <div class="food-icon">🍽️</div>
+
+                <h3>Good Food, Happy Mood!</h3>
+
+                <p>
+                    Discover your next favourite meal with Foodify.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Mission and vision -->
+    <section class="section" style="padding-top: 15px;">
+
+        <div class="section-heading">
+
+            <span class="eyebrow">Our Purpose</span>
+
+            <h2>Our Mission &amp; Vision</h2>
+
+            <p>
+                The ideas that guide the Foodify experience.
+            </p>
+
+        </div>
+
+        <div class="mission-grid">
+
+            <article class="mission-card">
+
+                <div class="card-icon">🎯</div>
+
+                <h3>Our Mission</h3>
+
+                <p>
+                    To make food discovery and ordering convenient by
+                    connecting customers with restaurant menus through
+                    a simple, accessible, and user-friendly platform.
+                </p>
+
+            </article>
+
+            <article class="mission-card">
+
+                <div class="card-icon">🌟</div>
+
+                <h3>Our Vision</h3>
+
+                <p>
+                    To create a reliable and enjoyable food ordering
+                    experience where customers can easily discover
+                    different cuisines and manage their orders.
+                </p>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+    <!-- Features -->
+    <section class="features-section">
+
+        <div class="section">
+
+            <div class="section-heading">
+
+                <span class="eyebrow">The Foodify Experience</span>
+
+                <h2>What You Can Do With Foodify</h2>
+
+                <p>
+                    Explore the key features designed to make food ordering
+                    easier and more convenient.
+                </p>
+
+            </div>
+
+            <div class="features-grid">
+
+                <article class="feature-card">
+
+                    <div class="feature-icon">🍴</div>
+
+                    <h3>Explore Restaurants</h3>
+
+                    <p>
+                        Discover available restaurants and explore
+                        different food options in one place.
+                    </p>
+
+                </article>
+
+                <article class="feature-card">
+
+                    <div class="feature-icon">📋</div>
+
+                    <h3>Browse Menus</h3>
+
+                    <p>
+                        View menu items, descriptions, prices, and ratings
+                        to help you choose your next meal.
+                    </p>
+
+                </article>
+
+                <article class="feature-card">
+
+                    <div class="feature-icon">🛒</div>
+
+                    <h3>Manage Your Cart</h3>
+
+                    <p>
+                        Add dishes to your cart and review your selections
+                        before proceeding to checkout.
+                    </p>
+
+                </article>
+
+                <article class="feature-card">
+
+                    <div class="feature-icon">💳</div>
+
+                    <h3>Convenient Checkout</h3>
+
+                    <p>
+                        Review your order and select an available payment
+                        method during checkout.
+                    </p>
+
+                </article>
+
+                <article class="feature-card">
+
+                    <div class="feature-icon">📦</div>
+
+                    <h3>Track Order Records</h3>
+
+                    <p>
+                        Visit My Orders to review your previous orders
+                        and their recorded status.
+                    </p>
+
+                </article>
+
+                <article class="feature-card">
+
+                    <div class="feature-icon">👤</div>
+
+                    <h3>Manage Your Profile</h3>
+
+                    <p>
+                        View your account information and update your
+                        name and delivery address.
+                    </p>
+
+                </article>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- How it works -->
+    <section class="section">
+
+        <div class="section-heading">
+
+            <span class="eyebrow">Simple and Convenient</span>
+
+            <h2>How Foodify Works</h2>
+
+            <p>
+                A straightforward journey from choosing a restaurant
+                to placing your order.
+            </p>
+
+        </div>
+
+        <div class="steps-grid">
+
+            <article class="step">
+
+                <div class="step-number">1</div>
+
+                <h3>Explore</h3>
+
+                <p>
+                    Browse restaurants and discover available cuisines.
+                </p>
+
+            </article>
+
+            <article class="step">
+
+                <div class="step-number">2</div>
+
+                <h3>Choose</h3>
+
+                <p>
+                    Select your favourite dishes from the restaurant menu.
+                </p>
+
+            </article>
+
+            <article class="step">
+
+                <div class="step-number">3</div>
+
+                <h3>Checkout</h3>
+
+                <p>
+                    Review your cart and submit your order.
+                </p>
+
+            </article>
+
+            <article class="step">
+
+                <div class="step-number">4</div>
+
+                <h3>Manage Orders</h3>
+
+                <p>
+                    View your order confirmation and order history.
+                </p>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+    <!-- Values -->
+    <section class="features-section">
+
+        <div class="section">
+
+            <div class="section-heading">
+
+                <span class="eyebrow">What Matters to Us</span>
+
+                <h2>Our Core Values</h2>
+
+                <p>
+                    The principles behind the Foodify experience.
+                </p>
+
+            </div>
+
+            <div class="values-grid">
+
+                <article class="value-card">
+
+                    <div class="card-icon">✨</div>
+
+                    <h3>Simplicity</h3>
+
+                    <p>
+                        We aim to keep restaurant discovery and ordering
+                        straightforward and easy to understand.
+                    </p>
+
+                </article>
+
+                <article class="value-card">
+
+                    <div class="card-icon">🤝</div>
+
+                    <h3>Customer Focus</h3>
+
+                    <p>
+                        We put the customer's experience at the centre
+                        of the application's design.
+                    </p>
+
+                </article>
+
+                <article class="value-card">
+
+                    <div class="card-icon">🍲</div>
+
+                    <h3>Food Discovery</h3>
+
+                    <p>
+                        We encourage customers to explore different
+                        restaurants, dishes, and cuisines.
+                    </p>
+
+                </article>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Call to action -->
+    <section class="cta">
+
+        <h2>Ready to Find Your Next Favourite Meal?</h2>
+
+        <p>
+            Explore restaurants, browse their menus, and start your
+            Foodify food ordering experience today.
+        </p>
+
+        <a href="restaurant" class="hero-button">
+            Start Exploring
+        </a>
+
+    </section>
+
+
+    <!-- Footer -->
+    <footer>
+
+        <div class="footer-grid">
+
+            <div>
+
+                <div class="footer-brand">Foodify</div>
+
+                <p class="footer-description">
+                    A convenient platform for discovering restaurants,
+                    exploring menus, and managing food orders.
+                    Good Food, Happy Mood!
+                </p>
+
+            </div>
+
+            <div class="footer-column">
+
+                <h3>Explore</h3>
+
+                <a href="restaurant">Home</a>
+                <a href="about.html">About Us</a>
+                <a href="cart.jsp">My Cart</a>
+                <a href="my-orders">My Orders</a>
+
+            </div>
+
+            <div class="footer-column">
+
+                <h3>Your Account</h3>
+
+                <a href="profile">My Profile</a>
+                <a href="login.html">Sign In</a>
+                <a href="register.html">Create Account</a>
+
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            &copy; 2026 Foodify. Good Food, Happy Mood!
+        </div>
+
+    </footer>
+
+</body>
+
+</html>
+```

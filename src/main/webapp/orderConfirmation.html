@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation | Foodify</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background-color: #f7f5ef;
+            color: #263238;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: #073b3a;
+            color: white;
+            padding: 18px 7%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.12);
+        }
+
+        .logo {
+            font-size: 29px;
+            font-weight: bold;
+            color: #f5c542;
+            letter-spacing: 0.5px;
+        }
+
+        .logo span {
+            color: white;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #f5c542;
+        }
+
+        /* Main container */
+        .container {
+            max-width: 1050px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        /* Confirmation card */
+        .confirmation-card {
+            background: white;
+            border-radius: 18px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.07);
+        }
+
+        .success-icon {
+            width: 85px;
+            height: 85px;
+            margin: 0 auto 22px;
+            border-radius: 50%;
+            background-color: #e3f5e9;
+            color: #218653;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            font-weight: bold;
+        }
+
+        .confirmation-card h1 {
+            color: #073b3a;
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .confirmation-card p {
+            color: #6b7777;
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        .order-number {
+            display: inline-block;
+            background-color: #fff5cf;
+            color: #765b00;
+            padding: 11px 20px;
+            border-radius: 8px;
+            margin-top: 22px;
+            font-weight: bold;
+        }
+
+        /* Order details */
+        .section-card {
+            background: white;
+            padding: 28px;
+            border-radius: 16px;
+            margin-top: 25px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .section-title {
+            color: #073b3a;
+            font-size: 21px;
+            margin-bottom: 22px;
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 22px;
+        }
+
+        .detail-label {
+            color: #7b8585;
+            font-size: 13px;
+            margin-bottom: 7px;
+        }
+
+        .detail-value {
+            color: #263238;
+            font-size: 15px;
+            font-weight: bold;
+            overflow-wrap: anywhere;
+        }
+
+        .status {
+            display: inline-block;
+            background: #fff3cf;
+            color: #8b6500;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+        }
+
+        /* Order summary */
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            margin: 15px 0;
+            color: #596565;
+            font-size: 15px;
+        }
+
+        .summary-row span:last-child {
+            text-align: right;
+        }
+
+        .summary-row.total {
+            border-top: 1px solid #e6e9e6;
+            padding-top: 18px;
+            margin-top: 20px;
+            color: #073b3a;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        /* Delivery message */
+        .delivery-message {
+            margin-top: 25px;
+            padding: 20px;
+            background-color: #edf7f3;
+            border-left: 4px solid #218653;
+            border-radius: 9px;
+            line-height: 1.7;
+        }
+
+        .delivery-message h3 {
+            color: #176b48;
+            margin-bottom: 7px;
+            font-size: 17px;
+        }
+
+        .delivery-message p {
+            color: #526760;
+            font-size: 14px;
+        }
+
+        /* Buttons */
+        .actions {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 25px;
+            border-radius: 9px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        .primary-btn {
+            background-color: #073b3a;
+            color: white;
+        }
+
+        .primary-btn:hover {
+            background-color: #0b5552;
+            transform: translateY(-2px);
+        }
+
+        .secondary-btn {
+            background-color: #f5c542;
+            color: #073b3a;
+        }
+
+        .secondary-btn:hover {
+            background-color: #e6b52f;
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 25px 15px;
+            color: #7b8585;
+            font-size: 13px;
+        }
+
+        @media (max-width: 600px) {
+            .navbar {
+                padding: 16px 5%;
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+
+            .logo {
+                font-size: 25px;
+            }
+
+            .nav-links {
+                gap: 15px;
+                flex-wrap: wrap;
+            }
+
+            .nav-links a {
+                font-size: 13px;
+            }
+
+            .container {
+                margin: 25px auto;
+                padding: 0 14px;
+            }
+
+            .confirmation-card {
+                padding: 30px 18px;
+            }
+
+            .confirmation-card h1 {
+                font-size: 26px;
+            }
+
+            .section-card {
+                padding: 22px 18px;
+            }
+
+            .details-grid {
+                grid-template-columns: 1fr;
+                gap: 18px;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">Food<span>ify</span></div>
+
+        <div class="nav-links">
+            <a href="restaurant">Home</a>
+            <a href="cart.jsp">Cart</a>
+            <a href="profile.jsp">Profile</a>
+        </div>
+    </nav>
+
+    <main class="container">
+
+        <!-- Success message -->
+        <section class="confirmation-card">
+            <div class="success-icon">&#10003;</div>
+
+            <h1>Order Placed Successfully!</h1>
+
+            <p>
+                Thank you for choosing Foodify!
+                Your order has been received and is being processed.
+                Get ready to enjoy something delicious.
+            </p>
+
+            <div class="order-number">
+                Order ID: #FD10245
+            </div>
+        </section>
+
+        <!-- Order details -->
+        <section class="section-card">
+            <h2 class="section-title">Order Details</h2>
+
+            <div class="details-grid">
+                <div>
+                    <div class="detail-label">Order ID</div>
+                    <div class="detail-value">#FD10245</div>
+                </div>
+
+                <div>
+                    <div class="detail-label">Order Date</div>
+                    <div class="detail-value">October 21, 2026</div>
+                </div>
+
+                <div>
+                    <div class="detail-label">Order Status</div>
+                    <div class="detail-value">
+                        <span class="status">Pending</span>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="detail-label">Payment Method</div>
+                    <div class="detail-value">Cash on Delivery</div>
+                </div>
+
+                <div>
+                    <div class="detail-label">Restaurant</div>
+                    <div class="detail-value">Your Selected Restaurant</div>
+                </div>
+
+                <div>
+                    <div class="detail-label">Estimated Delivery</div>
+                    <div class="detail-value">30–45 minutes</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Payment summary -->
+        <section class="section-card">
+            <h2 class="section-title">Payment Summary</h2>
+
+            <div class="summary-row">
+                <span>Item Total</span>
+                <span>₹550.00</span>
+            </div>
+
+            <div class="summary-row">
+                <span>Delivery Charges</span>
+                <span>₹30.00</span>
+            </div>
+
+            <div class="summary-row">
+                <span>Platform Fee</span>
+                <span>₹10.00</span>
+            </div>
+
+            <div class="summary-row">
+                <span>GST</span>
+                <span>₹42.00</span>
+            </div>
+
+            <div class="summary-row total">
+                <span>Total Paid / Payable</span>
+                <span>₹632.00</span>
+            </div>
+
+            <div class="delivery-message">
+                <h3>Your delicious food is on its way to preparation!</h3>
+                <p>
+                    You can check your order details in the My Orders section.
+                    Thank you for ordering with Foodify.
+                </p>
+            </div>
+        </section>
+
+        <!-- Navigation actions -->
+        <div class="actions">
+            <a href="restaurant" class="btn primary-btn">
+                Continue Shopping
+            </a>
+
+            <a href="my-orders.jsp" class="btn secondary-btn">
+                View My Orders
+            </a>
+        </div>
+
+    </main>
+
+    <footer>
+        &copy; 2026 Foodify. Good Food, Happy Mood!
+    </footer>
+
+</body>
+</html>

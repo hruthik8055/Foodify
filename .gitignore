@@ -1,0 +1,4 @@
+target/
+bin/
+.settings/
+.DS_Store
